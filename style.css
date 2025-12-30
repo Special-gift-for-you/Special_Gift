@@ -1,0 +1,413 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Cairo', sans-serif;
+}
+
+/* 🌲 الخلفية العامة (شجر كريسماس) */
+body {
+  margin: 0;
+  min-height: 100vh;
+
+  background:
+    linear-gradient(180deg, rgba(10,14,22,0.88), rgba(6,8,14,0.94)),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='none' stroke='rgba(255,170,200,0.4)' stroke-width='3'%3E%3Cpath d='M90 30v120M30 90h120'/%3E%3Cpath d='M20 90h25l20-35 25 70 20-35h25'/%3E%3Cpath d='M120 40l30 30'/%3E%3Ccircle cx='140' cy='50' r='8'/%3E%3C/g%3E%3C/svg%3E");
+
+  background-size: cover, 180px 180px;
+  background-attachment: fixed;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* App */
+.app {
+  max-width: 420px;
+  margin: auto;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative; /* 👈 السطر المهم */
+}
+
+/* Card */
+.card {
+  background: rgba(255, 240, 248, 0.95);
+  border-radius: 32px;
+  padding: 32px 24px;
+  margin: 80px auto 0;
+  text-align: center;
+  box-shadow:
+    0 20px 50px rgba(255, 105, 180, 0.35),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+  animation: fadeUp 0.8s ease;
+  position: relative;
+  z-index: 10;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(25px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Login */
+.year-box {
+  background: linear-gradient(90deg,#ff5fa2,#ff8ccf);
+  color: white;
+  width: 120px;
+  margin: auto;
+  padding: 10px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.tree-emoji {
+  font-size: 46px;
+  margin: 15px 0;
+}
+
+.title {
+  color: #c2187a;
+  font-size: 32px;
+}
+
+input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 25px;
+  border: 2px solid #ff9ecf;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+/* Button */
+button {
+  margin-top: 18px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg,#ff5fa2,#ff89c6);
+  box-shadow: 0 10px 25px rgba(255, 95, 162, 0.45);
+  transition: all 0.25s ease;
+}
+
+button:hover { transform: translateY(-2px); }
+button:active { transform: scale(0.97); }
+
+.icons {
+  margin-top: 15px;
+  font-size: 24px;
+}
+
+/* Text */
+.card h2 {
+  font-size: 22px;
+  color: #b0126f;
+}
+
+.card p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: #5a2a3a;
+  margin-bottom: 22px;
+}
+
+.name {
+  font-size: 42px;
+  color: #b5179e;
+}
+
+/* 🖤 صفحة الرسالة الأخيرة فقط (bac.jpg) */
+.special-bg {
+  background:
+    linear-gradient(rgba(255,240,248,0.92), rgba(255,240,248,0.92)),
+    url("bac.jpg") center/cover no-repeat;
+}
+
+/* تكبير الرسالة الحزينة */
+.final-message {
+  font-size: 18px;
+  line-height: 2.1;
+  color: #4b1f2d;
+  margin: 25px 0;
+}
+
+/* Hearts */
+.hearts-container span {
+  position: fixed;
+  bottom: -10px;
+  font-size: 16px;
+  opacity: 0.6;
+  animation: floatRotate linear infinite;
+}
+
+@keyframes floatRotate {
+  from { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+  to { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+}
+
+/* Final screen */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 182, 193, 0.97);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.finalBox { text-align: center; }
+
+.heart {
+  font-size: 90px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.date {
+  font-size: 32px;
+  color: #a00055;
+}
+
+.countdown {
+  font-size: 24px;
+  margin-top: 8px;
+  color: #7a003d;
+}
+
+/* ❄️ REAL SNOW CANVAS */
+#snowCanvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none; /* علشان الأزرار تفضل شغالة */
+  z-index: 999999;
+}
+
+/* صندوق الصورة */
+.memory-box {
+  margin: 25px auto 10px;
+  width: 100%;
+  max-width: 260px;
+  overflow: hidden;
+  border-radius: 22px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+  animation: memoryReveal 1.8s ease forwards;
+}
+
+/* الصورة نفسها */
+.memory-box img {
+  width: 100%;
+  display: block;
+  filter: grayscale(100%);
+  transform: scale(1.15);
+  animation: memoryImage 8s ease-in-out infinite alternate;
+}
+
+/* دخول الصندوق */
+@keyframes memoryReveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* حركة هادية للصورة */
+@keyframes memoryImage {
+  from {
+    transform: scale(1.05);
+  }
+  to {
+    transform: scale(1.15);
+  }
+}
+
+/* السماح بالاسكرول */
+#page1,
+#page2,
+#page3 {
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding-bottom: 120px;
+}
+
+/* شكل الاسكرول (ناعم وبمبي) */
+
+#page2::-webkit-scrollbar {
+  width: 6px;
+}
+
+#page2::-webkit-scrollbar-thumb {
+  background: rgba(255, 95, 162, 0.5);
+  border-radius: 10px;
+}
+
+#page2::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#page3::-webkit-scrollbar {
+  width: 6px;
+}
+
+#page3::-webkit-scrollbar-thumb {
+  background: rgba(255, 95, 162, 0.5);
+  border-radius: 10px;
+}
+
+#page3::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.fixed-finish {
+  background: linear-gradient(135deg,#ff3b6f,#c9184a);
+  box-shadow: 0 15px 35px rgba(201,24,74,0.5);
+}
+
+/* زر إنهاء ثابت للموبايل */
+.fixed-finish {
+  position: fixed !important;
+  inset-inline: 20px;
+  bottom: 15px;
+  max-width: 380px;
+  margin: auto;
+  z-index: 99999;
+}
+
+#page1 .card,
+#page2 .card,
+#page3 .card {
+  margin-top: 0;
+}
+
+/* Scroll Hint */
+.scroll-hint {
+  position: relative;
+  margin: 25px auto 10px;
+  width: fit-content;
+  text-align: center;
+  color: #b0126f;
+  opacity: 0.9;
+  z-index: 2;
+  pointer-events: none; /* علشان ما يعطلش الضغط */
+}
+
+.scroll-hint .arrow {
+  display: block;
+  font-size: 28px;
+  animation: arrowBounce 1.2s infinite ease-in-out;
+}
+
+.scroll-hint .text {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  margin-top: 2px;
+}
+
+/* Bounce animation */
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes hintFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 0.85; transform: translateY(0); }
+}
+
+.medical-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.syringe {
+  position: absolute;
+  font-size: 70px;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 18px rgba(255,105,180,0.8));
+  animation: floatSyringe 6s ease-in-out infinite;
+}
+
+.s1 {
+  top: 12%;
+  left: 6%;
+  transform: rotate(-25deg);
+}
+
+.s2 {
+  bottom: 18%;
+  right: 8%;
+  transform: rotate(20deg);
+  animation-delay: 2s;
+}
+
+@keyframes floatSyringe {
+  0%,100% { transform: translateY(0) rotate(var(--r, -20deg)); }
+  50% { transform: translateY(-25px) rotate(var(--r, -20deg)); }
+}
+
+.stethoscope {
+  position: absolute;
+  top: 55%;
+  left: 4%;
+  font-size: 78px;
+  opacity: 0.85;
+  filter: drop-shadow(0 0 15px rgba(255,182,193,0.6));
+  animation: slowPulse 4s ease-in-out infinite;
+}
+
+@keyframes slowPulse {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.ecg path {
+  fill: none;
+  stroke: #ff6fae;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: ecgMove 2.5s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(255,105,180,0.8));
+}
+
+@keyframes ecgMove {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ECG خارج الكارد فعليًا */
+.ecg-outside-fixed {
+  top: calc(100% + 20px);
+}
+
+.ecg-outside-fixed path {
+  fill: none;
+  stroke: #ff6fae;
+  stroke-width: 4;
+  stroke-linecap: round;
+
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: ecgMove 4s linear infinite;
+
+  filter: drop-shadow(0 0 12px rgba(255,105,180,0.9));
+}
